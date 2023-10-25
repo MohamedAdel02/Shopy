@@ -40,7 +40,6 @@ struct HomeView: View {
                 
             }
         }
-        
     }
     
 }
@@ -55,33 +54,40 @@ extension HomeView {
         
         List(homeViewModel.productSearchResult) { product in
             
-            HStack(alignment: .top) {
-                ZStack {
-                    
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundStyle(Color.white)
-                        .frame(width: 100, height: 130)
-                    
-                    AsyncImage(url: URL(string: product.image)) { image in
-                        image
-                            .resizable()
-                            .frame(width:90, height: 120)
+            NavigationLink {
+                ProductDetailsView(productID: product.id)
+                    .navigationBarTitleDisplayMode(.inline)
+            } label: {
+                
+                HStack(alignment: .top) {
+                    ZStack {
                         
-                    } placeholder: {
-                        ProgressView()
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(Color.white)
                             .frame(width: 100, height: 130)
+                        
+                        AsyncImage(url: URL(string: product.image)) { image in
+                            image
+                                .resizable()
+                                .frame(width:90, height: 120)
+                            
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 100, height: 130)
+                        }
                     }
+                    
+                    Text(product.title)
+                        .foregroundStyle(Color("textColor"))
+                        .padding()
+                        .lineLimit(3)
                 }
                 
-                Text(product.title)
-                    .foregroundStyle(Color("textColor"))
-                    .padding()
-                    .lineLimit(3)
             }
+            
         }
         .scrollIndicators(.hidden)
         .listStyle(.grouped)
-        .scrollContentBackground(.hidden)
         
     }
     
@@ -150,7 +156,7 @@ struct CategoryView: View {
                     .padding(.horizontal)
                     .padding(.top)
                     
-                    ProductHStack(products: products)
+                    ProductHList(products: products)
                     
                 }
             }
@@ -159,30 +165,6 @@ struct CategoryView: View {
 }
 
 
-struct ProductHStack: View {
-    
-    var products = [Product]()
-    
-    var body: some View {
-        
-        ScrollView(.horizontal) {
-            
-            HStack {
-                ForEach(products.prefix(4)) { product in
-                    
-                    ProductCell(product: product)
-                        .frame(width: 150)
-                }
-            }
-            .padding(.horizontal, 3)
-            .padding(.bottom, 10)
-            
-        }
-        .scrollIndicators(.hidden)
-        .frame(height: 250)
-        
-    }
-    
-}
+
 
 

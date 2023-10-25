@@ -1,40 +1,43 @@
 //
-//  ProductList.swift
+//  ProductHList.swift
 //  Shopy
 //
-//  Created by Mohamed Adel on 22/10/2023.
+//  Created by Mohamed Adel on 25/10/2023.
 //
 
 import SwiftUI
 
-struct ProductList: View {
+struct ProductHList: View {
     
     var products = [Product]()
-    var columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                
-                ForEach(products) { product in
+        ScrollView(.horizontal) {
+            
+            HStack {
+                ForEach(products.prefix(4)) { product in
                     
                     NavigationLink {
                         ProductDetailsView(productID: product.id)
                     } label: {
                         ProductCell(product: product)
+                            .frame(width: 150)
                             .navigationBarTitleDisplayMode(.inline)
                     }
+                    
                 }
             }
-            .padding()
+            .padding(.horizontal, 3)
+            .padding(.bottom, 10)
+            
         }
         .scrollIndicators(.hidden)
-        .background(Color("backgroundColor"))
+        .frame(height: 250)
         
     }
 }
 
 #Preview {
-    ProductList()
+    ProductHList()
 }

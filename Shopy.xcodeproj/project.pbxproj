@@ -28,6 +28,9 @@
 		D95FF41B2ADDBC1A00E6A9E7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95FF41A2ADDBC1A00E6A9E7 /* LoginView.swift */; };
 		D95FF4202ADDBD0B00E6A9E7 /* CinzelDecorative-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D95FF41F2ADDBD0B00E6A9E7 /* CinzelDecorative-Bold.ttf */; };
 		D95FF4222ADDBD1C00E6A9E7 /* Courgette-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D95FF4212ADDBD1C00E6A9E7 /* Courgette-Regular.ttf */; };
+		D97AFF5C2AE90D39000F96C3 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97AFF5B2AE90D39000F96C3 /* ProductDetailsView.swift */; };
+		D97AFF5E2AE964A2000F96C3 /* ProductHList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97AFF5D2AE964A2000F96C3 /* ProductHList.swift */; };
+		D97AFF602AE9664F000F96C3 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97AFF5F2AE9664F000F96C3 /* ProductDetailsViewModel.swift */; };
 		D99790172AE795C700E13320 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99790162AE795C700E13320 /* FirestoreManager.swift */; };
 		D9A072AB2AE4664800949696 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A072AA2AE4664800949696 /* SignUpView.swift */; };
 		D9A072AE2AE46CB900949696 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A072AD2AE46CB900949696 /* AuthMainView.swift */; };
@@ -62,6 +65,9 @@
 		D95FF41F2ADDBD0B00E6A9E7 /* CinzelDecorative-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CinzelDecorative-Bold.ttf"; sourceTree = "<group>"; };
 		D95FF4212ADDBD1C00E6A9E7 /* Courgette-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Courgette-Regular.ttf"; sourceTree = "<group>"; };
 		D95FF4232ADDBD3C00E6A9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D97AFF5B2AE90D39000F96C3 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
+		D97AFF5D2AE964A2000F96C3 /* ProductHList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHList.swift; sourceTree = "<group>"; };
+		D97AFF5F2AE9664F000F96C3 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		D99790162AE795C700E13320 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		D9A072AA2AE4664800949696 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D9A072AD2AE46CB900949696 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
@@ -243,6 +249,7 @@
 		D95FF4182ADD964C00E6A9E7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D97AFF5A2AE90CB1000F96C3 /* ProductDetails */,
 				D9A072AC2AE46CAD00949696 /* Auth */,
 				D92113152AE5B8EA0065ED41 /* ProductList */,
 				D9189B652ADE5F3B00780E03 /* Account */,
@@ -259,6 +266,15 @@
 				D93045C62AE15E4A00FF6032 /* Product.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D97AFF5A2AE90CB1000F96C3 /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D97AFF5B2AE90D39000F96C3 /* ProductDetailsView.swift */,
+				D97AFF5F2AE9664F000F96C3 /* ProductDetailsViewModel.swift */,
+			);
+			path = ProductDetails;
 			sourceTree = "<group>";
 		};
 		D9A072A92AE4663200949696 /* SignUp */ = {
@@ -285,6 +301,7 @@
 			children = (
 				D9A072B02AE47A8C00949696 /* TextFieldView.swift */,
 				D92113132AE5B75E0065ED41 /* ProductCell.swift */,
+				D97AFF5D2AE964A2000F96C3 /* ProductHList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -421,9 +438,12 @@
 				D9A072AE2AE46CB900949696 /* AuthMainView.swift in Sources */,
 				D9A072B12AE47A8C00949696 /* TextFieldView.swift in Sources */,
 				D93045C72AE15E4A00FF6032 /* Product.swift in Sources */,
+				D97AFF602AE9664F000F96C3 /* ProductDetailsViewModel.swift in Sources */,
+				D97AFF5C2AE90D39000F96C3 /* ProductDetailsView.swift in Sources */,
 				D9189B602ADE5F1D00780E03 /* CartView.swift in Sources */,
 				D92113122AE59A7D0065ED41 /* SignUpViewModel.swift in Sources */,
 				D95AB72D2AE0610B0033C89B /* HomeViewModel.swift in Sources */,
+				D97AFF5E2AE964A2000F96C3 /* ProductHList.swift in Sources */,
 				D9F9C4A12AE8B55200DDEA12 /* MockData.swift in Sources */,
 				D9A072AB2AE4664800949696 /* SignUpView.swift in Sources */,
 				D94FD1D92AE70F6300615F6F /* AuthManager.swift in Sources */,

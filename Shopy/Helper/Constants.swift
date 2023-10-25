@@ -16,6 +16,7 @@ struct K {
     struct API {
         static let allProducts = "\(K.baseURL)products"
         static let categories = "\(K.baseURL)products/categories"
+        static let categoryProducts = "\(K.baseURL)products/category/"
     }
     
 }
