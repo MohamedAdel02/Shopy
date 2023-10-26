@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject var homeViewModel = HomeViewModel()
-    @State private var images = ["image1", "image2", "image3"]
     
     var body: some View {
         
@@ -21,11 +20,12 @@ struct HomeView: View {
                 
             } else {
                 
-                Group {
-                    if homeViewModel.searchText.isEmpty {
-                        searchableIsNotActive
-                    } else {
-                        searchableIsActive
+                ZStack {
+                    
+                    searchableIsNotActive
+                    
+                    if !homeViewModel.searchText.isEmpty {
+                        SearchableIsActive(homeViewModel: homeViewModel)
                     }
                 }
                 .background(Color("backgroundColor"))
@@ -49,49 +49,7 @@ struct HomeView: View {
 }
 
 extension HomeView {
-    
-    var searchableIsActive: some View {
         
-        List(homeViewModel.productSearchResult) { product in
-            
-            NavigationLink {
-                ProductDetailsView(productID: product.id)
-                    .navigationBarTitleDisplayMode(.inline)
-            } label: {
-                
-                HStack(alignment: .top) {
-                    ZStack {
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundStyle(Color.white)
-                            .frame(width: 100, height: 130)
-                        
-                        AsyncImage(url: URL(string: product.image)) { image in
-                            image
-                                .resizable()
-                                .frame(width:90, height: 120)
-                            
-                        } placeholder: {
-                            ProgressView()
-                                .frame(width: 100, height: 130)
-                        }
-                    }
-                    
-                    Text(product.title)
-                        .foregroundStyle(Color("textColor"))
-                        .padding()
-                        .lineLimit(3)
-                }
-                
-            }
-            
-        }
-        .scrollIndicators(.hidden)
-        .listStyle(.grouped)
-        
-    }
-    
-    
     var searchableIsNotActive: some View {
         
         ScrollView {
@@ -110,9 +68,14 @@ extension HomeView {
     var imageSlider: some View {
         
         TabView {
-            ForEach(images, id: \.self) { image in
-                Image(image)
-                    .resizable()
+            ForEach(homeViewModel.imageSliderData, id: \.id) { product in
+                NavigationLink {
+                    ProductDetailsView(productID: product.id)
+                        .navigationBarTitleDisplayMode(.inline)
+                } label: {
+                    Image(product.imageName)
+                        .resizable()
+                }
             }
         }
         .frame(height: 270)
@@ -165,6 +128,62 @@ struct CategoryView: View {
 }
 
 
+
+struct SearchableIsActive: View {
+    
+    @ObservedObject var homeViewModel: HomeViewModel
+    @Environment(\.dismissSearch) var dismissSearch
+
+    
+    var body: some View {
+        
+        List(homeViewModel.productSearchResult) { product in
+            
+            Button(action: {
+                homeViewModel.searchSelectedProduct = product
+
+                Task {
+                    try await Task.sleep(nanoseconds: 1_000_000)
+                    dismissSearch()
+                }
+            }, label: {
+                HStack(alignment: .top) {
+                    ZStack {
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(Color.white)
+                            .frame(width: 100, height: 130)
+                        
+                        AsyncImage(url: URL(string: product.image)) { image in
+                            image
+                                .resizable()
+                                .frame(width:90, height: 120)
+                            
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 100, height: 130)
+                        }
+                    }
+                    
+                    Text(product.title)
+                        .foregroundStyle(Color("textColor"))
+                        .padding()
+                        .lineLimit(3)
+                }
+
+            })
+
+            
+        }
+        .scrollIndicators(.hidden)
+        .listStyle(.grouped)
+        .navigationDestination(item: $homeViewModel.searchSelectedProduct) { product in
+            ProductDetailsView(productID: product.id)
+                .navigationBarTitleDisplayMode(.inline)
+        }
+
+    }
+}
 
 
 

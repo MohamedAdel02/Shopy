@@ -12,6 +12,9 @@ struct ProductList: View {
     var products = [Product]()
     var columns = [GridItem(.flexible()), GridItem(.flexible())]
     
+    @EnvironmentObject var popToRoot: PopToRoot
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         
         ScrollView {
@@ -31,6 +34,9 @@ struct ProductList: View {
         }
         .scrollIndicators(.hidden)
         .background(Color("backgroundColor"))
+        .onChange(of: popToRoot.navToHome) {
+            dismiss()
+        }
         
     }
 }

@@ -52,30 +52,29 @@ class ProductDetailsViewModel: ObservableObject {
     
     func addSimilarProductsSubscriber() {
         
-        similarproductsSubject.sink { [weak self] category in
+        similarproductsSubscriber = similarproductsSubject.sink { [weak self] category in
             guard let url = URL(string: "\(K.API.categoryProducts)\(category)") else {
                 print("Invalid URL")
                 return
             }
             
             self?.getSimilarProducts(url: url)
+            self?.similarproductsSubscriber?.cancel()
         }
-        .store(in: &subscribers)
 
     }
     
     
     func getSimilarProducts(url: URL) {
         
-        similarproductsSubscriber = NetworkManager.shared.data(url: url)
+        NetworkManager.shared.data(url: url)
             .sink { completion in
                 NetworkManager.shared.handleCompletion(completion: completion)
             } receiveValue: { [weak self] similarProducts in
                 self?.similarProducts = similarProducts
-                
                 self?.similarProducts = similarProducts.filter { $0.id != self?.product?.id }
-                self?.similarproductsSubscriber?.cancel()
             }
+            .store(in: &subscribers)
     }
     
     func updateTotalPrice() {

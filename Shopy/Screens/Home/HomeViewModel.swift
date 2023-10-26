@@ -17,6 +17,13 @@ class HomeViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var searchText = ""
     @Published var productSearchResult = [Product]()
+    @Published var searchSelectedProduct: Product?
+    
+    var imageSliderData = [
+        (imageName: "image1", id: 14),
+        (imageName: "image2", id: 3),
+        (imageName: "image3", id: 6),
+    ]
     
     var productSubscriber: AnyCancellable?
     var categorySubscriber: AnyCancellable?

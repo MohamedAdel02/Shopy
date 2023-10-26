@@ -12,6 +12,9 @@ struct ProductDetailsView: View {
     @StateObject var productDetailsViewModel = ProductDetailsViewModel()
     var productID: Int
     
+    @EnvironmentObject var popToRoot: PopToRoot
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
 
         VStack {
@@ -47,7 +50,9 @@ struct ProductDetailsView: View {
         .onAppear {
             productDetailsViewModel.getProduct(id: productID)
         }
-
+        .onChange(of: popToRoot.navToHome) {
+            dismiss()
+        }
     }
 }
 

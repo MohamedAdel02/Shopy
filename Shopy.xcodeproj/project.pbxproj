@@ -35,6 +35,7 @@
 		D9A072AB2AE4664800949696 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A072AA2AE4664800949696 /* SignUpView.swift */; };
 		D9A072AE2AE46CB900949696 /* AuthMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A072AD2AE46CB900949696 /* AuthMainView.swift */; };
 		D9A072B12AE47A8C00949696 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A072B02AE47A8C00949696 /* TextFieldView.swift */; };
+		D9BA04E02AEA60A8008F2FF2 /* PopToRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA04DF2AEA60A8008F2FF2 /* PopToRoot.swift */; };
 		D9C35BE52AE7009800C9CA0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9C35BE42AE7009800C9CA0D /* GoogleService-Info.plist */; };
 		D9C35BE72AE7040300C9CA0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C35BE62AE7040300C9CA0D /* AppDelegate.swift */; };
 		D9F9C4A12AE8B55200DDEA12 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9C4A02AE8B55200DDEA12 /* MockData.swift */; };
@@ -72,6 +73,7 @@
 		D9A072AA2AE4664800949696 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		D9A072AD2AE46CB900949696 /* AuthMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMainView.swift; sourceTree = "<group>"; };
 		D9A072B02AE47A8C00949696 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		D9BA04DF2AEA60A8008F2FF2 /* PopToRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopToRoot.swift; sourceTree = "<group>"; };
 		D9C35BE42AE7009800C9CA0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D9C35BE62AE7040300C9CA0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9F9C4A02AE8B55200DDEA12 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				D9189B5B2ADE5EF000780E03 /* ShopyTabView.swift */,
+				D9BA04DF2AEA60A8008F2FF2 /* PopToRoot.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				D99790172AE795C700E13320 /* FirestoreManager.swift in Sources */,
 				D95AB72F2AE078270033C89B /* HomeView.swift in Sources */,
 				D9A072AE2AE46CB900949696 /* AuthMainView.swift in Sources */,
+				D9BA04E02AEA60A8008F2FF2 /* PopToRoot.swift in Sources */,
 				D9A072B12AE47A8C00949696 /* TextFieldView.swift in Sources */,
 				D93045C72AE15E4A00FF6032 /* Product.swift in Sources */,
 				D97AFF602AE9664F000F96C3 /* ProductDetailsViewModel.swift in Sources */,
