@@ -24,9 +24,9 @@ struct ProductList: View {
                     
                     NavigationLink {
                         ProductDetailsView(productID: product.id)
+                            .navigationBarTitleDisplayMode(.inline)
                     } label: {
                         ProductCell(product: product)
-                            .navigationBarTitleDisplayMode(.inline)
                     }
                 }
             }

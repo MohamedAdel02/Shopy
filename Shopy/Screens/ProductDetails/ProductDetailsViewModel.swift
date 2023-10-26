@@ -18,6 +18,10 @@ class ProductDetailsViewModel: ObservableObject {
     @Published var enableIncreasingQuantity = true
     @Published var enableDecreasingQuantity = false
     @Published var isLoading = true
+    @Published var availableSizes = [Size]()
+    @Published var selectedSize: Size?
+    @Published var sizeIsAvailable = false
+    var allSizes: [Size] = [.small, .medium, .large, .xLarge, .xxLarge]
     
     var productSubscriber: AnyCancellable?
     var similarproductsSubscriber: AnyCancellable?
@@ -45,9 +49,21 @@ class ProductDetailsViewModel: ObservableObject {
                 self?.product = product
                 self?.totalPrice = product?.price ?? 0.0
                 self?.isLoading = false
+                self?.getAvailableSizes(id: product?.id)
                 self?.similarproductsSubject.send(product?.category ?? "")
                 self?.productSubscriber?.cancel()
             }
+    }
+    
+    func getAvailableSizes(id: Int?) {
+        
+        for size in SizeMockData.availabeSizes {
+            if size.id == id {
+                sizeIsAvailable = true
+                availableSizes = size.availableSizes
+                selectedSize = availableSizes[0]
+            }
+        }
     }
     
     func addSimilarProductsSubscriber() {

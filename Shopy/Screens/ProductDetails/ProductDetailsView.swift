@@ -31,6 +31,11 @@ struct ProductDetailsView: View {
                             ProductImage(width: geo.size.width, imageURL: productDetailsViewModel.product?.image ?? "")
                             
                             productPrice
+                            
+                            if productDetailsViewModel.sizeIsAvailable {
+                                productSize
+                            }
+                            
                             productQuantity
                             moreAboutTheProduct
                             similarProducts
@@ -45,6 +50,10 @@ struct ProductDetailsView: View {
                     Spacer()
                     addToCartButton
                 }
+                
+                Rectangle()
+                    .frame(maxWidth: .infinity, maxHeight: 2)
+                    .foregroundStyle(Color.accentColor)
             }
         }
         .onAppear {
@@ -90,25 +99,67 @@ extension ProductDetailsView {
                 .foregroundStyle(Color.accentColor)
         }
         .padding(.horizontal, 20)
-        .padding(.bottom, 5)
+        .padding(.bottom, 10)
 
+    }
+    
+    var productSize: some View {
+        
+        VStack(alignment: .leading, spacing: 5) {
+            Text("Size")
+                .foregroundStyle(Color("textColor"))
+                .fontWeight(.semibold)
+            
+            HStack {
+                
+                ForEach(productDetailsViewModel.allSizes, id: \.self) { size in
+                    
+                    if productDetailsViewModel.availableSizes.contains(size) {
+                        Text(size.rawValue)
+                            .frame(width: 40, height: 40)
+                            .background(productDetailsViewModel.selectedSize == size ? Color.accentColor : Color.init(uiColor: UIColor.systemGray5))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .onTapGesture {
+                                productDetailsViewModel.selectedSize = size
+                            }
+                    } else {
+                        Text(size.rawValue)
+                            .frame(width: 40, height: 40)
+                            .background(Color.init(uiColor: UIColor.systemGray2))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .overlay {
+                                Rectangle()
+                                    .frame(width: 2, height: 48)
+                                    .rotationEffect(Angle(degrees: -45))
+                            }
+                    }
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.bottom, 30)
+        
     }
     
     
     var productQuantity: some View {
         
-        VStack(alignment: .leading) {
-            Text("In Stock")
-                .offset(y: 15)
-                .font(.title2)
-                .foregroundStyle(Color.green)
-                .fontWeight(.semibold)
+            VStack(alignment: .leading, spacing: 0) {
+                
+                if !productDetailsViewModel.sizeIsAvailable {
+                    Text("In Stock")
+                        .font(.title2)
+                        .foregroundStyle(Color.green)
+                        .fontWeight(.semibold)
+                }
             
             
             HStack(spacing: 15) {
                 
                 Text("Quantity")
                     .foregroundStyle(Color("textColor"))
+                    .fontWeight(.semibold)
+
                 
                 Button {
                     productDetailsViewModel.quantityDecreased()
