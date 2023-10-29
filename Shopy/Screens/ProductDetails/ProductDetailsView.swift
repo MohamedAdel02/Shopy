@@ -12,6 +12,7 @@ struct ProductDetailsView: View {
     @StateObject var productDetailsViewModel = ProductDetailsViewModel()
     var productID: Int
     
+    @EnvironmentObject var cartViewModel: CartViewModel
     @EnvironmentObject var popToRoot: PopToRoot
     @Environment(\.dismiss) private var dismiss
     
@@ -168,10 +169,10 @@ extension ProductDetailsView {
                         .frame(width: 40, height: 40)
                         .background(Color.init(uiColor: .systemGray5))
                         .foregroundStyle(Color("textColor"))
-                        .overlay(productDetailsViewModel.enableDecreasingQuantity ? Color.white.opacity(0) : Color.init(uiColor: .systemGray3) .opacity(0.8))
+                        .overlay(productDetailsViewModel.isMinQuantity ?  Color.init(uiColor: .systemGray3) .opacity(0.8) : Color.white.opacity(0))
                         .clipShape(Circle())
                 }
-                .disabled(!productDetailsViewModel.enableDecreasingQuantity)
+                .disabled(productDetailsViewModel.isMinQuantity)
                 
                 Text(productDetailsViewModel.quantity, format: .number)
                     .font(.title3)
@@ -184,10 +185,10 @@ extension ProductDetailsView {
                         .frame(width: 40, height: 40)
                         .background(Color.init(uiColor: .systemGray5))
                         .foregroundStyle(Color("textColor"))
-                        .overlay(productDetailsViewModel.enableIncreasingQuantity ? Color.white.opacity(0) : Color.init(uiColor: .systemGray3) .opacity(0.6))
+                        .overlay(productDetailsViewModel.isMaxQuantity ? Color.init(uiColor: .systemGray3) .opacity(0.6): Color.white.opacity(0))
                         .clipShape(Circle())
                 }
-                .disabled(!productDetailsViewModel.enableIncreasingQuantity)
+                .disabled(productDetailsViewModel.isMaxQuantity)
                 
             }
         }
@@ -248,10 +249,15 @@ extension ProductDetailsView {
         .padding(.horizontal, 20)
     }
     
-    
+
     var addToCartButton: some View {
         
         Button(action: {
+            guard let product = productDetailsViewModel.product else {
+                return
+            }
+
+            cartViewModel.cartProducts.append(CartProduct(id: product.id, title: product.title, image: product.image, price: product.price, size: productDetailsViewModel.selectedSize, quantity: productDetailsViewModel.quantity))
             
         }, label: {
             Text("ADD TO CART")

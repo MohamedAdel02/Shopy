@@ -15,8 +15,8 @@ class ProductDetailsViewModel: ObservableObject {
     @Published var quantity = 1
     @Published var totalPrice = 0.0
     @Published var similarProducts = [Product]()
-    @Published var enableIncreasingQuantity = true
-    @Published var enableDecreasingQuantity = false
+    @Published var isMaxQuantity = false
+    @Published var isMinQuantity = true
     @Published var isLoading = true
     @Published var availableSizes = [Size]()
     @Published var selectedSize: Size?
@@ -99,15 +99,15 @@ class ProductDetailsViewModel: ObservableObject {
             .sink { [weak self] quantity in
                 self?.totalPrice = (self?.product?.price ?? 0.0) * Double(quantity)
                 
-                self?.enableDecreasingQuantity = true
-                self?.enableIncreasingQuantity = true
+                self?.isMinQuantity = false
+                self?.isMaxQuantity = false
                 
                 if quantity == 1 {
-                    self?.enableDecreasingQuantity = false
+                    self?.isMinQuantity = true
                 }
                 
                 if quantity == 10 {
-                    self?.enableIncreasingQuantity = false
+                    self?.isMaxQuantity = true
                 } 
             }
             .store(in: &subscribers)
