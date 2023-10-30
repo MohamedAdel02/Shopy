@@ -27,7 +27,7 @@ struct ShopyTabView: View {
                 }
                 .tag(1)
             
-            AccountView()
+            ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person")
                 }
