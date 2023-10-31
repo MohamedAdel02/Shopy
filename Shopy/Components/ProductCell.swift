@@ -44,6 +44,7 @@ struct ProductCell: View {
                         .font(.footnote)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color("textColor"))
+                        .multilineTextAlignment(.leading)
                     
                     Spacer()
                 }

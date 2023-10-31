@@ -8,7 +8,7 @@
 import Foundation
 
 
-@MainActor class LoginViewModel: ObservableObject {
+class LoginViewModel: ObservableObject {
     
     @Published var email = ""
     @Published var password = ""
@@ -31,12 +31,11 @@ import Foundation
     }
     
     
-    func fieldsAreEmpty(email: String, password: String) -> Bool{
+    func fieldsAreEmpty(email: String, password: String) -> Bool {
         
         if email.isEmpty || password.isEmpty {
             alertTitle = "Empty field"
             alertMessage = "Please enter all required fields"
-            
             alertIsPresented = true
             return true
         }
@@ -49,13 +48,30 @@ import Foundation
         Task {
             do {
                 try await AuthManager.shared.login(email: email, password: password)
-                userLogged = true
+                await MainActor.run {
+                    loginCompleted()
+                }
             } catch {
-                alertTitle = "Invalid email or password"
-                alertIsPresented = true
+                await MainActor.run {
+                    wrongInfo()
+                }
+                
             }
         }
         
     }
+    
+    func wrongInfo() {
+        alertTitle = "Wrong email or password"
+        alertIsPresented = true
+    }
+    
+    func loginCompleted() {
+        
+        userLogged.toggle()
+        email = ""
+        password = ""
+    }
+    
     
 }

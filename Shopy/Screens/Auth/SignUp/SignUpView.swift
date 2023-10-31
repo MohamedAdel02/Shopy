@@ -105,6 +105,7 @@ extension SignUpView {
             Spacer()
             
             Button(action: {
+                hideKeyboard()
                 signUpViewModel.signUpPressed()
             }, label: {
                 Text("Sign up")

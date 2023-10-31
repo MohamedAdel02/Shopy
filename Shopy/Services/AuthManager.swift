@@ -27,4 +27,38 @@ class AuthManager {
         try await Auth.auth().signIn(withEmail: email, password: password)
     }
     
+    
+    func resetPassword(email: String) async throws {
+        
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
+    func resetPassword(currentPassword: String, newPassword: String) async throws {
+        
+        guard let user = Auth.auth().currentUser, let email = user.email else {
+            return
+        }
+
+        let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
+        try await Auth.auth().currentUser?.reauthenticate(with: credential)
+        try await user.updatePassword(to: newPassword)
+    }
+    
+    func logout() throws {
+        
+        try Auth.auth().signOut()
+    }
+    
+    
+    func deleteUser(password: String) async throws {
+        
+        guard let user = Auth.auth().currentUser, let email = user.email else {
+            return
+        }
+        
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        try await Auth.auth().currentUser?.reauthenticate(with: credential)
+        try await user.delete()
+    }
+    
 }

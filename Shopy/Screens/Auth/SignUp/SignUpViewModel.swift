@@ -8,7 +8,7 @@
 import Foundation
 
 
-@MainActor class SignUpViewModel: ObservableObject {
+class SignUpViewModel: ObservableObject {
     
     @Published var email = ""
     @Published var password = ""
@@ -104,13 +104,33 @@ import Foundation
         Task {
             do {
                 try await AuthManager.shared.createAccount(email: email, password: password, name: name, country: selectedCountry)
-                userSignedUp = true
+                await MainActor.run {
+                    signUpCompleted()
+                }
             } catch {
-                print(error.localizedDescription)
+                await MainActor.run {
+                    usedEmail()
+                }
             }
         }
         
     }
+    
+    func signUpCompleted() {
+        
+        userSignedUp.toggle()
+        email = ""
+        password = ""
+        name = ""
+        selectedCountry = "Egypt"
+    }
+    
+    func usedEmail() {
+        
+        alertTitle = "The email address is already in use by another account"
+        alertIsPresented = true
+    }
+    
     
     
 }

@@ -62,6 +62,9 @@ extension HomeView {
             }
         }
         .scrollIndicators(.hidden)
+        .onTapGesture {
+            hideKeyboard()
+        }
         
     }
     
@@ -78,7 +81,7 @@ extension HomeView {
                 }
             }
         }
-        .frame(height: 270)
+        .frame(height: 200)
         .tabViewStyle(PageTabViewStyle())
         
     }
@@ -176,6 +179,7 @@ struct SearchableIsActive: View {
             
         }
         .scrollIndicators(.hidden)
+        .scrollDismissesKeyboard(.immediately)
         .listStyle(.grouped)
         .navigationDestination(item: $homeViewModel.searchSelectedProduct) { product in
             ProductDetailsView(productID: product.id)

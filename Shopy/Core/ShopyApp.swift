@@ -11,10 +11,25 @@ import SwiftUI
 struct ShopyApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject var currentUser = CurrentUser()
     
     var body: some Scene {
         WindowGroup {
-            ShopyTabView()
+            
+            ZStack {
+                
+                AuthMainView()
+                
+                if currentUser.isLogin {
+                    ShopyTabView()
+                }
+                
+            }
+            .environmentObject(currentUser)
+            
         }
+        
     }
+    
 }
+

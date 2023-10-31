@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     
     @ObservedObject var loginViewModel: LoginViewModel
+    @State var forgotPassword = false
     @Binding var isHavingAccount: Bool
     
     var body: some View {
@@ -24,21 +25,30 @@ struct LoginView: View {
                     .foregroundStyle(Color(UIColor.systemGray4))
                     .ignoresSafeArea()
                 
-                VStack() {
+                
+                if forgotPassword {
+                    ResetPasswordView(forgotPassword: $forgotPassword)
+                        .transition(.move(edge: .bottom))
                     
-                    loginInfo
+                } else {
                     
-                    HStack {
-                        forgotYourPasswordButton
-                        Spacer()
-                        loginButton
+                    VStack() {
+                        
+                        loginInfo
+                        
+                        HStack {
+                            forgotYourPasswordButton
+                            Spacer()
+                            loginButton
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 20)
+                        
+                        goToSignUp
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 20)
+                    .padding()
                     
-                    goToSignUp
                 }
-                .padding()
                 
             }
             .frame(maxWidth: .infinity, maxHeight: 400)
@@ -90,7 +100,9 @@ extension LoginView {
     var forgotYourPasswordButton: some View {
         
         Button(action: {
-            
+            withAnimation {
+                forgotPassword = true
+            }
         }, label: {
             Text("Forgot your password?")
                 .font(.footnote)
@@ -103,6 +115,8 @@ extension LoginView {
     var loginButton: some View {
         
         Button(action: {
+            
+            hideKeyboard()
             loginViewModel.loginPressed()
         }, label: {
             Text("Login")

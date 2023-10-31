@@ -11,6 +11,7 @@ struct AuthMainView: View {
     
     @StateObject var loginViewModel = LoginViewModel()
     @StateObject var signUpViewModel = SignUpViewModel()
+    @EnvironmentObject var currentUser: CurrentUser
     @State var isHavingAccount = true
     
     var body: some View {
@@ -28,15 +29,19 @@ struct AuthMainView: View {
                 }
             }
             .background(Color("backgroundColor"))
+            .onTapGesture {
+                hideKeyboard()
+            }
         }
         .tint(Color("textColor"))
-        .fullScreenCover(isPresented: $loginViewModel.userLogged) {
-            ShopyTabView()
-        }
-        .fullScreenCover(isPresented: $signUpViewModel.userSignedUp) {
-            ShopyTabView()
-        }
-        
+        .onChange(of: loginViewModel.userLogged, { _, _ in
+            currentUser.isLogin = true
+        })
+        .onChange(of: signUpViewModel.userSignedUp, { _, _ in
+            currentUser.isLogin = true
+            isHavingAccount = true
+        })
+
     }
 }
 

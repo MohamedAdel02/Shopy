@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDJuMerLYEqD-8MuPB_kx5gK7TwI5_qBG0</string>
+	<string>AIzaSyB1576er2j43TSbjI0X7NO7HCnbb4YCkEY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>878097041726</string>
+	<string>405296458269</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.badr.Shopy</string>
 	<key>PROJECT_ID</key>
-	<string>shopy-ecommerce</string>
+	<string>shopy-8d09d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>shopy-ecommerce.appspot.com</string>
+	<string>shopy-8d09d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:878097041726:ios:a70b34eae9abc412d4446f</string>
+	<string>1:405296458269:ios:04eaa1cecdf3adaaebb4f4</string>
 </dict>
 </plist>
