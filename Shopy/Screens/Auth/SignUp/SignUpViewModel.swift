@@ -24,24 +24,10 @@ class SignUpViewModel: ObservableObject {
     
     init() {
         
-        countries = getCountries()
+        countries = Countries.getCountries()
     }
     
-    
-    func getCountries() -> [String] {
-        let countriesCodes = Locale.Region.isoRegions
-        var countries = [String]()
         
-        for countryCode in countriesCodes {
-            let identifier = countryCode.identifier
-            
-            if identifier.count == 2 && identifier != "QO" && identifier != "AQ" {
-                countries.append(Locale.current.localizedString(forRegionCode: identifier) ?? "")
-            }
-        }
-        return countries.sorted()
-    }
-    
     func signUpPressed() {
         
         let name = name.trimmingCharacters(in: .whitespacesAndNewlines)

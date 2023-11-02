@@ -18,7 +18,7 @@ class AuthManager {
         
         try await Auth.auth().createUser(withEmail: email, password: password)
     
-        try await FirestoreManager.shared.addUerInfo(name: name, country: country)
+        try await FirestoreManager.shared.updateUerInfo(user: User(name: name, email: email, country: country))
     }
     
     

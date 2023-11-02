@@ -73,7 +73,7 @@ class ChangePasswordViewModel: ObservableObject {
     
     func changingCompleted() {
         
-        alertTitle = "Your password changed successfully"
+        alertTitle = "Your password has been updated successfully"
         alertMessage = ""
         alertIsPresented = true
     }

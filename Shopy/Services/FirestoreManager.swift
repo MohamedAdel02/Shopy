@@ -17,18 +17,39 @@ class FirestoreManager {
     
     private init() { }
     
-    func addUerInfo(name: String, country: String) async throws {
+    func updateUerInfo(user: User) async throws {
         
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
         
-        let data = [
-            "name": name,
-            "country": country,
+        let data: [String: Any] = [
+            "name": user.name ?? "",
+            "email": user.email ?? "",
+            "country": user.country ?? "",
+            "city": user.city ?? "",
+            "address": user.address ?? ""
         ]
         
         try await db.collection("users").document(uid).setData(data)
+    }
+    
+    func getUserInfo() async throws -> User? {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        
+        let snapshot = try await db.collection("users").document(uid).getDocument()
+        
+        let name = snapshot.get("name") as? String
+        let email = snapshot.get("email") as? String
+        let country = snapshot.get("country") as? String
+        let city = snapshot.get("city") as? String
+        let address = snapshot.get("address") as? String
+
+        return User(name: name, email: email, country: country, city: city, address: address)
+
     }
     
 }

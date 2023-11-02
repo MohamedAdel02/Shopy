@@ -31,7 +31,7 @@ struct ProfileView: View {
             .navigationDestination(for: ProfileOption.self, destination: { option in
                 switch option {
                 case .info:
-                    ChangePasswordView()
+                    ProfileInfoView()
                 case .orders:
                     ChangePasswordView()
                 case .changePassword:
@@ -66,19 +66,36 @@ extension ProfileView {
         
         HStack {
             
-            Text("Hello, Mohamed")
-                .foregroundStyle(Color("textColor"))
-                .font(.custom("Courgette-Regular", size: 25))
-
+            if let name = currentUser.user?.name {
+                
+                Text("Hello, \(name.components(separatedBy: " ").first ?? "")")
+                    .foregroundStyle(Color("textColor"))
+                    .font(.custom("Courgette-Regular", size: 25))
+                
+            }
+            
             Spacer()
-
-            Image(systemName: "person")
-                .resizable()
-                .frame(width: 35, height: 35)
-                .padding(15)
-                .foregroundStyle(Color("textColor"))
-                .background(Color.init(uiColor: .systemGray4))
-                .clipShape(.circle)
+            
+            
+            if let data = currentUser.userPhoto, let image = UIImage(data: data) {
+                
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(width: 75, height: 75)
+                    .foregroundStyle(Color("textColor"))
+                    .background(Color.init(uiColor: .systemGray4))
+                    .clipShape(.circle)
+            } else {
+                
+                Image(systemName: "person")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .padding(20)
+                    .foregroundStyle(Color("textColor"))
+                    .background(Color.init(uiColor: .systemGray4))
+                    .clipShape(.circle)
+            }
+            
             
         }
         .padding(30)
