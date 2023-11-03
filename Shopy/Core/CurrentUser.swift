@@ -73,6 +73,18 @@ class CurrentUser: ObservableObject {
         
     }
     
+    func updateUserAddress(address: String) {
+        
+        Task {
+            do {
+                try await FirestoreManager.shared.updateUserAddress(address: address)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
     func updateImage(image: Data) {
         
         Task {

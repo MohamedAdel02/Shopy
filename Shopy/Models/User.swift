@@ -13,7 +13,7 @@ struct User {
     let email: String?
     let country: String?
     let city: String?
-    let address: String?
+    var address: String?
     
     init(name: String?, email: String?, country: String?, city: String? = nil, address: String? = nil) {
         self.name = name

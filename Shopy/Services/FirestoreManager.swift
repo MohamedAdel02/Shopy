@@ -31,7 +31,20 @@ class FirestoreManager {
             "address": user.address ?? ""
         ]
         
-        try await db.collection("users").document(uid).setData(data)
+        try await db.collection("users").document(uid).updateData(data)
+    }
+    
+    func updateUserAddress(address: String) async throws {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let data: [String: Any] = [
+            "address": address
+        ]
+        
+        try await db.collection("users").document(uid).updateData(data)
     }
     
     func getUserInfo() async throws -> User? {
@@ -50,6 +63,12 @@ class FirestoreManager {
 
         return User(name: name, email: email, country: country, city: city, address: address)
 
+    }
+    
+    
+    func deleteUser(uid: String) async throws {
+
+        try await db.collection("users").document(uid).delete()                  
     }
     
 }

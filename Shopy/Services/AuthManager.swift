@@ -58,6 +58,9 @@ class AuthManager {
         
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await Auth.auth().currentUser?.reauthenticate(with: credential)
+        
+        try await FirestoreManager.shared.deleteUser(uid: user.uid)
+        try await StorageManager.shared.deleteImage()
         try await user.delete()
     }
     

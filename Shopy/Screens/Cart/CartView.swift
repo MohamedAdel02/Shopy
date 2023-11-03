@@ -23,6 +23,7 @@ struct CartView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color("backgroundColor"))
         }
+        .tint(.text)
     }
 }
 
@@ -83,7 +84,7 @@ extension CartView {
                 
                 Rectangle()
                     .frame(maxWidth: .infinity, maxHeight: 2)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color(red: 0.522, green: 0.740, blue: 0.776))
             }
             .padding(.top, 5)
             .background(.white)
@@ -114,18 +115,18 @@ extension CartView {
     
     var proccedToBuyButton: some View {
         
-        Button(action: {
-            
-        }, label: {
-            Text("PROCCED TO BUY")
+        NavigationLink {
+            DeliveryAddressView()
+                .navigationTitle("Delivery Address")
+        } label: {
+            Text("PROCEED TO BUY")
                 .font(.headline)
                 .foregroundStyle(.white)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 10)
                 .background(Color("textColor"))
                 .clipShape(RoundedRectangle(cornerRadius: 30))
-            
-        })
+        }
         .padding(.trailing)
     }
     
