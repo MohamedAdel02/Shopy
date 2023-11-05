@@ -31,7 +31,7 @@ class FirestoreManager {
             "address": user.address ?? ""
         ]
         
-        try await db.collection("users").document(uid).updateData(data)
+        try await db.collection("users").document(uid).setData(data)
     }
     
     func updateUserAddress(address: String) async throws {

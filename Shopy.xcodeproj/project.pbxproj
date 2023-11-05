@@ -61,6 +61,8 @@
 		D9EEACE42AF430F5006EDDBC /* EditAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EEACE32AF430F5006EDDBC /* EditAddressView.swift */; };
 		D9EEACE62AF43AFB006EDDBC /* DeliveryAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EEACE52AF43AFB006EDDBC /* DeliveryAddressViewModel.swift */; };
 		D9EEACE82AF45A7A006EDDBC /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EEACE72AF45A7A006EDDBC /* MapView.swift */; };
+		D9F802D42AF81E74009EF976 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F802D32AF81E74009EF976 /* PaymentView.swift */; };
+		D9F802D72AF82924009EF976 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F802D62AF82924009EF976 /* OrderConfirmationView.swift */; };
 		D9F9C4A12AE8B55200DDEA12 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F9C4A02AE8B55200DDEA12 /* MockData.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +124,8 @@
 		D9EEACE32AF430F5006EDDBC /* EditAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressView.swift; sourceTree = "<group>"; };
 		D9EEACE52AF43AFB006EDDBC /* DeliveryAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressViewModel.swift; sourceTree = "<group>"; };
 		D9EEACE72AF45A7A006EDDBC /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		D9F802D32AF81E74009EF976 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		D9F802D62AF82924009EF976 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationView.swift; sourceTree = "<group>"; };
 		D9F9C4A02AE8B55200DDEA12 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E9EC204A0B80A937402D49C6 /* Pods_Shopy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shopy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -307,6 +311,8 @@
 		D95FF4182ADD964C00E6A9E7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				D9F802D52AF8290F009EF976 /* OrderConfirmation */,
+				D9F802D22AF81E66009EF976 /* Payment */,
 				D9EEACE02AF41223006EDDBC /* DeliveryAddress */,
 				D97AFF5A2AE90CB1000F96C3 /* ProductDetails */,
 				D9A072AC2AE46CAD00949696 /* Auth */,
@@ -432,6 +438,22 @@
 				D9EEACE72AF45A7A006EDDBC /* MapView.swift */,
 			);
 			path = DeliveryAddress;
+			sourceTree = "<group>";
+		};
+		D9F802D22AF81E66009EF976 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				D9F802D32AF81E74009EF976 /* PaymentView.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		D9F802D52AF8290F009EF976 /* OrderConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				D9F802D62AF82924009EF976 /* OrderConfirmationView.swift */,
+			);
+			path = OrderConfirmation;
 			sourceTree = "<group>";
 		};
 		EEEA0B99FF70AACD0BD48E37 /* Pods */ = {
@@ -583,6 +605,7 @@
 				D95AB72D2AE0610B0033C89B /* HomeViewModel.swift in Sources */,
 				D97AFF5E2AE964A2000F96C3 /* ProductHList.swift in Sources */,
 				D9F9C4A12AE8B55200DDEA12 /* MockData.swift in Sources */,
+				D9F802D42AF81E74009EF976 /* PaymentView.swift in Sources */,
 				D99AB80D2AEFEC9C0080DB36 /* ResetPasswordView.swift in Sources */,
 				D9A072AB2AE4664800949696 /* SignUpView.swift in Sources */,
 				D9EEACE22AF41246006EDDBC /* DeliveryAddressView.swift in Sources */,
@@ -590,6 +613,7 @@
 				D9EE22862AEC4483007DFBFA /* CartViewModel.swift in Sources */,
 				D9BC5EA82AF043E100FA60B2 /* DeleteAccountViewModel.swift in Sources */,
 				D9CC340F2AF26EFA00A7E8AF /* ProfileInfoView.swift in Sources */,
+				D9F802D72AF82924009EF976 /* OrderConfirmationView.swift in Sources */,
 				D94FD1D92AE70F6300615F6F /* AuthManager.swift in Sources */,
 				D99B47972AF1777500C4456D /* CurrentUser.swift in Sources */,
 				D92113172AE5B8F90065ED41 /* ProductList.swift in Sources */,

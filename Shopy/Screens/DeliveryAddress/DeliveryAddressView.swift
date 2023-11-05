@@ -83,9 +83,10 @@ extension DeliveryAddressView {
     
     var continueButton: some View {
         
-        Button(action: {
-            
-        }, label: {
+        NavigationLink {
+            PaymentView()
+                .navigationTitle("Payment")
+        } label: {
             Text("CONTINUE")
                 .font(.headline)
                 .foregroundStyle(.white)
@@ -93,9 +94,10 @@ extension DeliveryAddressView {
                 .padding(.vertical, 10)
                 .background(deliveryAddressViewModel.selectedAddress == nil ? .gray : .text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
-        })
+        }
         .padding()
         .disabled(deliveryAddressViewModel.selectedAddress == nil ? true : false)
+
     }
     
 }
@@ -122,6 +124,7 @@ struct NoAddressView: View {
 struct AddressView: View {
     
     @ObservedObject var deliveryAddressViewModel: DeliveryAddressViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     let address: String
     let addressSource: AddressSource
     
@@ -153,6 +156,7 @@ struct AddressView: View {
                         .frame(width: 25)
                         .onTapGesture {
                             deliveryAddressViewModel.selectedAddress = addressSource
+                            cartViewModel.address = address
                         }
                 }
                 

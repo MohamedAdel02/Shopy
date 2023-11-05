@@ -12,6 +12,7 @@ class CartViewModel: ObservableObject {
     
     @Published var cartProducts = [CartProduct]()
     @Published var totalPrice = 0.0
+    var address = ""
             
     var subscribers = Set<AnyCancellable>()
     
