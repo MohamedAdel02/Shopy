@@ -13,9 +13,9 @@ struct ProfileInfoView: View {
     @StateObject var profileInfoViewModel = ProfileInfoViewModel()
     @EnvironmentObject var currentUser: CurrentUser
     @Environment(\.dismiss) var dismiss
-    @State var removeImageConfirmation = false
-    @State var didAppear = false
-    @State var shouldDismiss = false
+    @State private var removeImageConfirmation = false
+    @State private var didAppear = false
+    @State private var shouldDismiss = false
     
     var body: some View {
             ScrollView {
@@ -92,7 +92,7 @@ extension ProfileInfoView {
                     Image(uiImage: image)
                         .resizable()
                         .frame(width: 100, height: 100)
-                        .foregroundStyle(Color("textColor"))
+                        .foregroundStyle(Color.text)
                         .background(Color.init(uiColor: .systemGray4))
                         .clipShape(.circle)
                     
@@ -114,14 +114,14 @@ extension ProfileInfoView {
                     .resizable()
                     .frame(width: 70, height: 70)
                     .padding(20)
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .background(Color.init(uiColor: .systemGray4))
                     .clipShape(.circle)
             }
 
             PhotosPicker(selection: $profileInfoViewModel.selectedImage, matching: .images) {
                 Text("Change photo")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
             }
 
         }
@@ -134,7 +134,7 @@ extension ProfileInfoView {
             Text("Country")
                 .padding(.leading, 8)
                 .fontWeight(.medium)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             
             Picker("Country", selection: $profileInfoViewModel.country) {
@@ -158,7 +158,7 @@ extension ProfileInfoView {
             Text("Address")
                 .padding(.leading, 8)
                 .fontWeight(.medium)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             TextEditor(text: $profileInfoViewModel.address)
                 .frame(height: 100)
@@ -185,7 +185,7 @@ extension ProfileInfoView {
                 .frame(width: 100, height: 10)
                 .padding()
                 .foregroundStyle(Color(UIColor.systemGray6))
-                .background(Color("textColor"))
+                .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
         })
         .padding(.top)
@@ -205,7 +205,7 @@ struct ProfileInfoTextField: View {
             Text(label)
                 .padding(.leading, 8)
                 .fontWeight(.medium)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             TextField(label, text: $text)
                 .padding()

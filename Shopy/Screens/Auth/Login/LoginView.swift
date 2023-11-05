@@ -10,7 +10,7 @@ import SwiftUI
 struct LoginView: View {
     
     @ObservedObject var loginViewModel: LoginViewModel
-    @State var forgotPassword = false
+    @State private var forgotPassword = false
     @Binding var isHavingAccount: Bool
     
     var body: some View {
@@ -124,7 +124,7 @@ extension LoginView {
                 .frame(width: 100, height: 10)
                 .padding()
                 .foregroundStyle(Color(UIColor.systemGray6))
-                .background(Color("textColor"))
+                .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
         })
         
@@ -146,7 +146,7 @@ extension LoginView {
                 }
             } label: {
                 Text("Sign up")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
             }
             
         }

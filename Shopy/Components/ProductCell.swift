@@ -43,7 +43,7 @@ struct ProductCell: View {
                         .lineLimit(2)
                         .font(.footnote)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color("textColor"))
+                        .foregroundStyle(Color.text)
                         .multilineTextAlignment(.leading)
                     
                     Spacer()
@@ -61,7 +61,7 @@ struct ProductCell: View {
                         .lineLimit(2)
                         .font(.headline)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.turquoise)
                 }
                 
             }

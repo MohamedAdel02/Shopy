@@ -35,7 +35,7 @@ struct TextFieldView: View {
             .autocorrectionDisabled(true)
             .frame(maxWidth: .infinity, maxHeight: 35)
             .padding(.horizontal)
-            .background(Color("backgroundColor"))
+            .background(Color.background)
             .clipShape(RoundedRectangle(cornerRadius: 15))
         }
         

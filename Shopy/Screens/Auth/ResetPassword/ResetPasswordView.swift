@@ -23,7 +23,7 @@ struct ResetPasswordView: View {
                 .padding(.vertical)
             
             Text("We will send a reset password link to your email")
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .frame(height: 60)
             
             sendButton
@@ -53,7 +53,7 @@ extension ResetPasswordView {
         Image(systemName: "arrow.backward")
             .resizable()
             .frame(width: 20, height: 20)
-            .foregroundStyle(Color("textColor"))
+            .foregroundStyle(Color.text)
             .onTapGesture {
                 withAnimation {
                     resetPasswordViewModel.email = ""
@@ -77,7 +77,7 @@ extension ResetPasswordView {
                     .frame(width: 100, height: 10)
                     .padding()
                     .foregroundStyle(Color(UIColor.systemGray6))
-                    .background(Color("textColor"))
+                    .background(Color.text)
                     .clipShape(RoundedRectangle(cornerRadius: 30))
             })
         }

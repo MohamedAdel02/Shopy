@@ -33,7 +33,7 @@ struct ProductList: View {
             .padding()
         }
         .scrollIndicators(.hidden)
-        .background(Color("backgroundColor"))
+        .background(Color.background)
         .onChange(of: popToRoot.navToHome) {
             dismiss()
         }

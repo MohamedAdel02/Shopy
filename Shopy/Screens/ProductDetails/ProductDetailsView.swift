@@ -42,7 +42,7 @@ struct ProductDetailsView: View {
                             similarProducts
                         }
                     }
-                    .background(Color("backgroundColor"))
+                    .background(Color.background)
                     .scrollIndicators(.hidden)
                 }
                 
@@ -52,9 +52,7 @@ struct ProductDetailsView: View {
                     addToCartButton
                 }
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 2)
-                    .foregroundStyle(Color.accentColor)
+                Line()
             }
         }
         .onAppear {
@@ -77,7 +75,7 @@ extension ProductDetailsView {
         Text(productDetailsViewModel.product?.title ?? "")
             .padding(20)
             .font(.title2)
-            .foregroundStyle(Color("textColor"))
+            .foregroundStyle(Color.text)
             .fontWeight(.semibold)
             .fixedSize(horizontal: false, vertical: true)
         
@@ -91,13 +89,13 @@ extension ProductDetailsView {
                 .padding(.top)
                 .font(.title)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             Text("All prices include VAT.")
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             Text("Free delivery")
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.turquoise)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 10)
@@ -118,7 +116,7 @@ extension ProductDetailsView {
                     if productDetailsViewModel.availableSizes.contains(size) {
                         Text(size.rawValue)
                             .frame(width: 40, height: 40)
-                            .background(productDetailsViewModel.selectedSize == size ? Color.accentColor : Color.init(uiColor: UIColor.systemGray5))
+                            .background(productDetailsViewModel.selectedSize == size ? Color.turquoise : Color.init(uiColor: UIColor.systemGray5))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .onTapGesture {
                                 productDetailsViewModel.selectedSize = size
@@ -158,7 +156,7 @@ extension ProductDetailsView {
             HStack(spacing: 15) {
                 
                 Text("Quantity")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .fontWeight(.semibold)
 
                 
@@ -168,7 +166,7 @@ extension ProductDetailsView {
                     Text("-")
                         .frame(width: 40, height: 40)
                         .background(Color.init(uiColor: .systemGray5))
-                        .foregroundStyle(Color("textColor"))
+                        .foregroundStyle(Color.text)
                         .overlay(productDetailsViewModel.isMinQuantity ?  Color.init(uiColor: .systemGray3) .opacity(0.8) : Color.white.opacity(0))
                         .clipShape(Circle())
                 }
@@ -176,7 +174,7 @@ extension ProductDetailsView {
                 
                 Text(productDetailsViewModel.quantity, format: .number)
                     .font(.title3)
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                 
                 Button {
                     productDetailsViewModel.quantityIncreased()
@@ -184,7 +182,7 @@ extension ProductDetailsView {
                     Text("+")
                         .frame(width: 40, height: 40)
                         .background(Color.init(uiColor: .systemGray5))
-                        .foregroundStyle(Color("textColor"))
+                        .foregroundStyle(Color.text)
                         .overlay(productDetailsViewModel.isMaxQuantity ? Color.init(uiColor: .systemGray3) .opacity(0.6): Color.white.opacity(0))
                         .clipShape(Circle())
                 }
@@ -200,14 +198,14 @@ extension ProductDetailsView {
         
         VStack(alignment: .leading) {
             Text("More about the product:")
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .font(.title3)
                 .fontWeight(.semibold)
             
             
             Text(productDetailsViewModel.product?.description ?? "")
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
         }
         .padding(.horizontal, 20)
         .padding(.top)
@@ -218,7 +216,7 @@ extension ProductDetailsView {
         
         VStack(alignment: .leading){
             Text("You might also like")
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .padding(.horizontal, 20)
                 .padding(.top, 30)
                 .font(.title2)
@@ -236,7 +234,7 @@ extension ProductDetailsView {
         VStack(alignment: .leading) {
             Text("Total")
                 .font(.title3)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .fontWeight(.semibold)
             
             
@@ -244,7 +242,7 @@ extension ProductDetailsView {
             Text(productDetailsViewModel.totalPrice, format: .currency(code: "USD"))
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.turquoise)
         }
         .padding(.horizontal, 20)
     }
@@ -265,7 +263,7 @@ extension ProductDetailsView {
                 .foregroundStyle(.white)
                 .padding(.horizontal, 15)
                 .padding(.vertical, 10)
-                .background(Color("textColor"))
+                .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
             
         })

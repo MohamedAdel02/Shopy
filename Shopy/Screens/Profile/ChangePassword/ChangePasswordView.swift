@@ -34,7 +34,7 @@ struct ChangePasswordView: View {
                         .frame(width: 100, height: 10)
                         .padding()
                         .foregroundStyle(Color(UIColor.systemGray6))
-                        .background(Color("textColor"))
+                        .background(Color.text)
                         .clipShape(RoundedRectangle(cornerRadius: 30))
                 })
                 .padding(.top)

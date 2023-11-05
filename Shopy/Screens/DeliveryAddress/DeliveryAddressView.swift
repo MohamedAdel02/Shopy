@@ -22,9 +22,7 @@ struct DeliveryAddressView: View {
             
             Spacer()
             
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 2)
-                .foregroundStyle(Color(red: 0.522, green: 0.740, blue: 0.776))
+            Line()
             
         }
         .background(Color.init(uiColor: .systemGray6))
@@ -137,7 +135,7 @@ struct AddressView: View {
                     Text(address)
                 }
                 .fontWeight(.medium)
-                .foregroundStyle(.text)
+                .foregroundStyle(Color.text)
                 
                 Spacer(minLength: 80)
                 
@@ -151,7 +149,7 @@ struct AddressView: View {
                     
                     Circle()
                         .stroke(lineWidth: 2)
-                        .foregroundStyle(.text)
+                        .foregroundStyle(Color.text)
                         .frame(width: 25)
                         .onTapGesture {
                             deliveryAddressViewModel.selectedAddress = addressSource
@@ -171,7 +169,7 @@ struct AddressView: View {
                     }
                 } label: {
                     Text("Edit address")
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.turquoise)
                 }
 
             }

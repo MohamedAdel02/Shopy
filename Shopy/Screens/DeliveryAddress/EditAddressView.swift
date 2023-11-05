@@ -11,7 +11,7 @@ struct EditAddressView: View {
     
     @EnvironmentObject var currentUser: CurrentUser
     @Environment(\.dismiss) private var dismiss
-    @State var address = ""
+    @State private var address = ""
     
     var body: some View {
         
@@ -29,9 +29,7 @@ struct EditAddressView: View {
                 
                 Spacer()
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 2)
-                    .foregroundStyle(Color(red: 0.522, green: 0.740, blue: 0.776))
+                Line()
             }
             
         }
@@ -59,7 +57,7 @@ extension EditAddressView {
             Text("Address")
                 .padding(.leading, 8)
                 .fontWeight(.medium)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             TextEditor(text: $address)
                 .frame(height: 150)

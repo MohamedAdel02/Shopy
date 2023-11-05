@@ -25,14 +25,14 @@ struct HomeView: View {
                     searchableIsNotActive
                     
                     if !homeViewModel.searchText.isEmpty {
-                        SearchableIsActive(homeViewModel: homeViewModel)
+                        SearchView(homeViewModel: homeViewModel)
                     }
                 }
-                .background(Color("backgroundColor"))
+                .background(Color.background)
                 .searchable(text: $homeViewModel.searchText)
                 .foregroundStyle(Color.white)
                 .autocorrectionDisabled(true)
-                .toolbarBackground(Color(Color.accentColor))
+                .toolbarBackground(Color(Color.turquoise))
                 .toolbarBackground(.visible, for: .navigationBar)
                 .onAppear {
                     UISearchBar.appearance().tintColor = .white
@@ -40,6 +40,7 @@ struct HomeView: View {
                 
             }
         }
+        .tint(Color.text)
     }
     
 }
@@ -105,7 +106,7 @@ struct CategoryView: View {
                         Text(category.capitalized)
                             .font(.title2)
                             .fontWeight(.semibold)
-                            .foregroundStyle(Color("textColor"))
+                            .foregroundStyle(Color.text)
                         
                         Spacer()
                         
@@ -115,7 +116,7 @@ struct CategoryView: View {
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             Text("View All")
-                                .foregroundStyle(Color.accentColor)
+                                .foregroundStyle(Color.turquoise)
                         }
                         
                     }
@@ -132,7 +133,7 @@ struct CategoryView: View {
 
 
 
-struct SearchableIsActive: View {
+struct SearchView: View {
     
     @ObservedObject var homeViewModel: HomeViewModel
     @Environment(\.dismissSearch) var dismissSearch
@@ -169,7 +170,7 @@ struct SearchableIsActive: View {
                     }
                     
                     Text(product.title)
-                        .foregroundStyle(Color("textColor"))
+                        .foregroundStyle(Color.text)
                         .padding()
                         .lineLimit(3)
                 }

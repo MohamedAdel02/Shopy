@@ -12,7 +12,7 @@ struct AuthMainView: View {
     @StateObject var loginViewModel = LoginViewModel()
     @StateObject var signUpViewModel = SignUpViewModel()
     @EnvironmentObject var currentUser: CurrentUser
-    @State var isHavingAccount = true
+    @State private var isHavingAccount = true
     
     var body: some View {
         
@@ -28,12 +28,12 @@ struct AuthMainView: View {
                         .transition(.move(edge: .bottom))
                 }
             }
-            .background(Color("backgroundColor"))
+            .background(Color.background)
             .onTapGesture {
                 hideKeyboard()
             }
         }
-        .tint(Color("textColor"))
+        .tint(Color.text)
         .onChange(of: loginViewModel.userLogged, { _, _ in
             currentUser.isLogin = true
         })
@@ -58,11 +58,11 @@ extension AuthMainView {
             
             Text("SHOPY")
                 .font(.custom("CinzelDecorative-Bold", size: 50))
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             Text("Whatever you want\nWhenever you need")
                 .font(.custom("Courgette-Regular", size: 18))
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
         }
         .frame(maxWidth: .infinity, alignment: .leading)

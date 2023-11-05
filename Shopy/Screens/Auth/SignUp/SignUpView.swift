@@ -92,7 +92,7 @@ extension SignUpView {
             .padding()
             .frame(height: 35)
             .tint(.init(uiColor: UIColor.systemGray3))
-            .background(Color("backgroundColor"))
+            .background(Color.background)
             .clipShape(RoundedRectangle(cornerRadius: 15))
         }
         
@@ -113,7 +113,7 @@ extension SignUpView {
                     .frame(width: 100, height: 10)
                     .padding()
                     .foregroundStyle(Color(UIColor.systemGray6))
-                    .background(Color("textColor"))
+                    .background(Color.text)
                     .clipShape(RoundedRectangle(cornerRadius: 30))
             })
             
@@ -136,7 +136,7 @@ extension SignUpView {
                 }
             } label: {
                 Text("Log in")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
             }
             
         }

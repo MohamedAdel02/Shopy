@@ -10,7 +10,7 @@ import SwiftUI
 struct DeleteAccountView: View {
     
     @StateObject var deleteAccountViewModel = DeleteAccountViewModel()
-    @State var confirmationIsPresented = false
+    @State private var confirmationIsPresented = false
     @EnvironmentObject var currentUser: CurrentUser
 
     
@@ -23,7 +23,7 @@ struct DeleteAccountView: View {
             VStack(alignment: .leading, spacing: 20) {
                 
                 Text("Deleting your account is a permanent operation")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .font(.callout)
                 
                 TextFieldView(label: "Password", placeholder: "Enter your Password", text: $deleteAccountViewModel.password, isSecured: true)
@@ -40,7 +40,7 @@ struct DeleteAccountView: View {
                             .frame(width: 100, height: 10)
                             .padding()
                             .foregroundStyle(Color(UIColor.systemGray6))
-                            .background(Color("textColor"))
+                            .background(Color.text)
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                     })
                 }

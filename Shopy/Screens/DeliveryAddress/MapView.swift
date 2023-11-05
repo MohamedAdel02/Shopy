@@ -13,9 +13,9 @@ struct MapView: View {
     @ObservedObject var deliveryAddressViewModel: DeliveryAddressViewModel
     @Environment(\.dismiss) private var dismiss
     
-    @State var center = CLLocationCoordinate2D(latitude: 30.047, longitude: 31.22367)
+    @State private var center = CLLocationCoordinate2D(latitude: 30.047, longitude: 31.22367)
     
-    @State var cameraPosition: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.047, longitude: 31.22367), latitudinalMeters: 10000, longitudinalMeters: 10000))
+    @State private var cameraPosition: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.047, longitude: 31.22367), latitudinalMeters: 10000, longitudinalMeters: 10000))
     
     
     var body: some View {
@@ -45,7 +45,7 @@ struct MapView: View {
                     .font(.title3)
                     .padding(.horizontal, 25)
                     .padding(.vertical, 10)
-                    .background(.text)
+                    .background(Color.text)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding()
                 

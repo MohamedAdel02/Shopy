@@ -11,7 +11,7 @@ struct ProfileView: View {
     
     @StateObject var profileViewModel = ProfileViewModel()
     @EnvironmentObject var currentUser: CurrentUser
-    @State var logoutConfirmation = false
+    @State private var logoutConfirmation = false
     
     var body: some View {
         
@@ -23,9 +23,7 @@ struct ProfileView: View {
                 Spacer()
                 logoutButton
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 2)
-                    .foregroundStyle(Color(red: 0.522, green: 0.740, blue: 0.776))
+                Line()
             }
             .background(Color.init(uiColor: .systemGray5))
             .navigationDestination(for: ProfileOption.self, destination: { option in
@@ -51,7 +49,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .tint(Color("textColor"))
+        .tint(Color.text)
 
     }
 }
@@ -69,7 +67,7 @@ extension ProfileView {
             if let name = currentUser.user?.name {
                 
                 Text("Hello, \(name.components(separatedBy: " ").first ?? "")")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .font(.custom("Courgette-Regular", size: 25))
                 
             }
@@ -82,7 +80,7 @@ extension ProfileView {
                 Image(uiImage: image)
                     .resizable()
                     .frame(width: 75, height: 75)
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .background(Color.init(uiColor: .systemGray4))
                     .clipShape(.circle)
             } else {
@@ -91,7 +89,7 @@ extension ProfileView {
                     .resizable()
                     .frame(width: 40, height: 40)
                     .padding(20)
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .background(Color.init(uiColor: .systemGray4))
                     .clipShape(.circle)
             }
@@ -111,12 +109,12 @@ extension ProfileView {
                     
                     HStack {
                         Text(option.rawValue)
-                            .foregroundStyle(option == .deleteAccount ? .white : Color("textColor"))
+                            .foregroundStyle(option == .deleteAccount ? .white : Color.text)
                         
                         Spacer()
                         
                         Image(systemName: "chevron.right")
-                            .foregroundStyle(option == .deleteAccount ? .white : Color("textColor"))
+                            .foregroundStyle(option == .deleteAccount ? .white : Color.text)
                         
                     }
                     .padding()
@@ -141,7 +139,7 @@ extension ProfileView {
                 .font(.title3)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical)
-                .background(Color("textColor"))
+                .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding()
         })

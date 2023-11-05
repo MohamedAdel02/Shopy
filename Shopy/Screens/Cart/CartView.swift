@@ -21,9 +21,9 @@ struct CartView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("backgroundColor"))
+            .background(Color.background)
         }
-        .tint(.text)
+        .tint(Color.text)
     }
 }
 
@@ -38,22 +38,28 @@ extension CartView {
         
         VStack(spacing: 3) {
             
+            Spacer()
+            
             Image(systemName: "cart")
                 .resizable()
                 .frame(width: 200, height: 200)
                 .padding(.bottom, 40)
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.turquoise)
             
             Text("Your cart is empty")
                 .font(.title2)
                 .bold()
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
             
             Text("Looks like you haven't added anything to your cart yet")
                 .padding(.horizontal, 50)
                 .multilineTextAlignment(.center)
                 .fontWeight(.semibold)
                 .foregroundStyle(Color.init(uiColor: UIColor.systemGray2))
+            
+            Spacer()
+            
+            Line()
         }
     }
     
@@ -82,9 +88,7 @@ extension CartView {
                     proccedToBuyButton
                 }
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight: 2)
-                    .foregroundStyle(Color(red: 0.522, green: 0.740, blue: 0.776))
+                Line()
             }
             .padding(.top, 5)
             .background(.white)
@@ -99,7 +103,7 @@ extension CartView {
         VStack(alignment: .leading) {
             Text("Total")
                 .font(.title3)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .fontWeight(.semibold)
             
             
@@ -107,7 +111,7 @@ extension CartView {
             Text(cartViewModel.totalPrice, format: .currency(code: "USD"))
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.turquoise)
         }
         .padding(.leading)
         
@@ -124,7 +128,7 @@ extension CartView {
                 .foregroundStyle(.white)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 10)
-                .background(Color("textColor"))
+                .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
         }
         .padding(.trailing)

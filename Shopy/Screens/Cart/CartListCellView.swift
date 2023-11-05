@@ -37,9 +37,7 @@ struct CartListCellView: View {
             .padding(.horizontal, 10)
             .padding(.bottom, 10)
             
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 2)
-                .foregroundStyle(Color.accentColor)
+            Line()
         }
     }
     
@@ -86,12 +84,12 @@ extension CartListCellView {
                 Text("-")
                     .frame(width: 35, height: 35)
                     .background(product.isMinQuantity ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
             })
             .disabled(product.isMinQuantity)
             
             Text(product.quantity, format: .number)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .frame(width: 25)
             
             Button(action: {
@@ -100,7 +98,7 @@ extension CartListCellView {
                 Text("+")
                     .frame(width: 35, height: 35)
                     .background(product.isMaxQuantity ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
             })
             .disabled(product.isMaxQuantity)
             
@@ -115,7 +113,7 @@ extension CartListCellView {
         VStack(alignment: .leading) {
             Text(product.title)
                 .font(.headline)
-                .foregroundStyle(Color("textColor"))
+                .foregroundStyle(Color.text)
                 .fontWeight(.semibold)
                 .padding(.vertical, 10)
             
@@ -126,7 +124,7 @@ extension CartListCellView {
             if let size = product.size {
                 
                 Text("Size: \(size.rawValue)")
-                    .foregroundStyle(Color("textColor"))
+                    .foregroundStyle(Color.text)
                     .fontWeight(.semibold)
             }
         }
@@ -136,7 +134,7 @@ extension CartListCellView {
         
         Text(product.totalPrice, format: .currency(code: "USD"))
             .font(.title2)
-            .foregroundStyle(Color("textColor"))
+            .foregroundStyle(Color.text)
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity, alignment: .trailing)
     }
