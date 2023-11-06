@@ -15,6 +15,8 @@ struct ProductDetailsView: View {
     @EnvironmentObject var cartViewModel: CartViewModel
     @EnvironmentObject var popToRoot: PopToRoot
     @Environment(\.dismiss) private var dismiss
+    @State private var alertIsPresented = false
+    @State private var alertTitle = ""
     
     var body: some View {
 
@@ -61,6 +63,10 @@ struct ProductDetailsView: View {
         .onChange(of: popToRoot.navToHome) {
             dismiss()
         }
+        .alert(alertTitle, isPresented: $alertIsPresented) {
+            Button("OK") { }
+        }
+
     }
 }
 
@@ -237,8 +243,6 @@ extension ProductDetailsView {
                 .foregroundStyle(Color.text)
                 .fontWeight(.semibold)
             
-            
-            
             Text(productDetailsViewModel.totalPrice, format: .currency(code: "USD"))
                 .font(.title2)
                 .fontWeight(.semibold)
@@ -255,7 +259,15 @@ extension ProductDetailsView {
                 return
             }
 
-            cartViewModel.cartProducts.append(CartProduct(id: product.id, title: product.title, image: product.image, price: product.price, size: productDetailsViewModel.selectedSize, quantity: productDetailsViewModel.quantity))
+            let cartProduct = CartProduct(id: product.id, title: product.title, image: product.image, price: product.price, size: productDetailsViewModel.selectedSize, quantity: productDetailsViewModel.quantity)
+            
+            if cartViewModel.cartProducts.contains(where: { $0.id == cartProduct.id }) {
+                alertTitle = "The product is already in the cart"
+                alertIsPresented.toggle()
+            } else {
+                cartViewModel.cartProducts.append(cartProduct)
+                cartViewModel.updateCart(product: cartProduct)
+            }
             
         }, label: {
             Text("ADD TO CART")

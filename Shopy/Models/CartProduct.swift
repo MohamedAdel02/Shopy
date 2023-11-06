@@ -16,8 +16,6 @@ struct CartProduct: Identifiable {
     var totalPrice: Double
     let size: Size?
     var quantity: Int
-    var isMaxQuantity = false
-    var isMinQuantity = false
     
     init(id: Int, title: String, image: String, price: Double, size: Size?, quantity: Int) {
         self.id = id
@@ -28,12 +26,7 @@ struct CartProduct: Identifiable {
         self.quantity = quantity
         
         totalPrice = price * Double(quantity)
-                
-        if quantity == 1 {
-            isMinQuantity = true
-        } else if quantity == 10 {
-            isMaxQuantity = true
-        }
+
     }
     
 }

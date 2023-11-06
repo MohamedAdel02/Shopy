@@ -48,10 +48,11 @@ struct OrderConfirmationView: View {
                     addressDetails
                     confirmOrderButton
                     
+                    Spacer()
                     Line()
                     
                 }
-                .frame(maxWidth: .infinity)
+                .frame(minHeight: geo.size.height)
                 .background(Color.init(uiColor: .systemGray6))
             }
             .scrollIndicators(.hidden)

@@ -53,7 +53,7 @@ class CurrentUser: ObservableObject {
                     self.user = user
                 }
             } catch {
-                print(error.localizedDescription)
+                print("getUserData \(error.localizedDescription)")
             }
         }
     }
@@ -66,7 +66,7 @@ class CurrentUser: ObservableObject {
                 try await FirestoreManager.shared.updateUerInfo(user: user)
                 getUserData()
             } catch {
-                print(error.localizedDescription)
+                print("updateUserData \(error.localizedDescription)")
             }
             
         }
@@ -79,7 +79,7 @@ class CurrentUser: ObservableObject {
             do {
                 try await FirestoreManager.shared.updateUserAddress(address: address)
             } catch {
-                print(error.localizedDescription)
+                print("updateUserAddress \(error.localizedDescription)")
             }
         }
         
@@ -92,7 +92,7 @@ class CurrentUser: ObservableObject {
             do {
                 try await StorageManager.shared.uploadImage(data: image)
             } catch {
-                print(error.localizedDescription)
+                print("updateImage \(error.localizedDescription)")
             }
                
         }
@@ -108,7 +108,7 @@ class CurrentUser: ObservableObject {
                     userPhoto = image
                 }
             } catch {
-                print(error.localizedDescription)
+                print("getImage \(error.localizedDescription)")
             }
         }
         
@@ -120,7 +120,7 @@ class CurrentUser: ObservableObject {
             do {
                 try await StorageManager.shared.deleteImage()
             } catch {
-                print(error.localizedDescription)
+                print("deleteImage \(error.localizedDescription)")
             }
         }
         

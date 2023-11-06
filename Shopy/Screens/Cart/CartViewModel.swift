@@ -18,6 +18,7 @@ class CartViewModel: ObservableObject {
     
     init() {
         updateTotalPrice()
+        getCart()
     }
     
     func quantityIncreased(id: Int) {
@@ -42,21 +43,14 @@ class CartViewModel: ObservableObject {
     }
     
     func quantityChanged(index: Array.Index) {
-                     
-        cartProducts[index].isMaxQuantity = false
-        cartProducts[index].isMinQuantity = false
-        
-        if cartProducts[index].quantity == 1 {
-            cartProducts[index].isMinQuantity = true
-        } else if cartProducts[index].quantity == 10 {
-            cartProducts[index].isMaxQuantity = true
-        }
-                
+                                   
         cartProducts[index].totalPrice = cartProducts[index].price * Double(cartProducts[index].quantity)
+        updateCart(product: cartProducts[index])
     }
     
     func deletePressed(id: Int) {
         cartProducts.removeAll(where: { $0.id == id })
+        deleteFromCart(id: id)
     }
     
     func updateTotalPrice() {
@@ -74,6 +68,48 @@ class CartViewModel: ObservableObject {
                                 
             }
             .store(in: &subscribers)
+    }
+    
+    func getCart() {
+        
+        
+        Task {
+            do {
+                guard let prodcuts = try await FirestoreManager.shared.getCartProducts() else {
+                    return
+                }
+                await MainActor.run {
+                    cartProducts = prodcuts
+                }
+            } catch {
+                print("getCart \(error.localizedDescription)")
+            }
+        }
+        
+    }
+    
+    func updateCart(product: CartProduct) {
+        
+        Task {
+            do {
+                try await FirestoreManager.shared.updateCartProduct(product: product)
+            } catch {
+                print("updateCart \(error.localizedDescription)")
+            }
+            
+        }
+    }
+    
+    func deleteFromCart(id: Int) {
+        
+        Task {
+            do {
+                try await FirestoreManager.shared.deleteCartProduct(id: id)
+            } catch {
+                print("deleteFromCart \(error.localizedDescription)")
+            }
+            
+        }
     }
 
     

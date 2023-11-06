@@ -83,10 +83,10 @@ extension CartListCellView {
             }, label: {
                 Text("-")
                     .frame(width: 35, height: 35)
-                    .background(product.isMinQuantity ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
+                    .background(product.quantity == 1 ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
                     .foregroundStyle(Color.text)
             })
-            .disabled(product.isMinQuantity)
+            .disabled(product.quantity == 1)
             
             Text(product.quantity, format: .number)
                 .foregroundStyle(Color.text)
@@ -97,10 +97,10 @@ extension CartListCellView {
             }, label: {
                 Text("+")
                     .frame(width: 35, height: 35)
-                    .background(product.isMaxQuantity ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
+                    .background(product.quantity == 10 ? Color.init(uiColor: .systemGray3) : Color.init(uiColor: .systemGray5))
                     .foregroundStyle(Color.text)
             })
-            .disabled(product.isMaxQuantity)
+            .disabled(product.quantity == 10)
             
         }
         .background(.white)
