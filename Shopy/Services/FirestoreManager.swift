@@ -150,5 +150,17 @@ class FirestoreManager {
         try await db.collection("users").document(uid).collection("cart").document("\(id)").delete()
     }
     
+    func deleteAllCart(products: [CartProduct]) async throws {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        for product in products {
+            try await db.collection("users").document(uid).collection("cart").document("\(product.id)").delete()
+        }
+        
+    }
+    
     
 }

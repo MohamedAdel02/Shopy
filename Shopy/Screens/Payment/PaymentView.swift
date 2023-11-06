@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PaymentView: View {
     
+    @Binding var rootIsActive : Bool
+    
     var body: some View {
         VStack(alignment: .trailing) {
             
@@ -26,7 +28,7 @@ struct PaymentView: View {
 }
 
 #Preview {
-    PaymentView()
+    PaymentView(rootIsActive: .constant(false))
 }
 
 extension PaymentView {
@@ -92,7 +94,7 @@ extension PaymentView {
     var continueButton: some View {
         
         NavigationLink {
-            OrderConfirmationView()
+            OrderConfirmationView(rootIsActive: $rootIsActive)
         } label: {
             Text("CONTINUE")
                 .font(.headline)

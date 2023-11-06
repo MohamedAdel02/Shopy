@@ -10,6 +10,8 @@ import SwiftUI
 struct OrderConfirmationView: View {
     
     @EnvironmentObject var cartViewModel: CartViewModel
+    @StateObject var orderViewModel = OrderViewModel()
+    @Binding var rootIsActive: Bool
     
     var body: some View {
         
@@ -56,6 +58,12 @@ struct OrderConfirmationView: View {
                 .background(Color.init(uiColor: .systemGray6))
             }
             .scrollIndicators(.hidden)
+            .navigationDestination(isPresented: $orderViewModel.detailsIsPresented) {
+                if let order = orderViewModel.order {
+                    OrderDetailsView(rootIsActive: $rootIsActive, order: order)
+                        .navigationTitle("Order Details")
+                }
+            }
             
         }
         
@@ -63,7 +71,7 @@ struct OrderConfirmationView: View {
 }
 
 #Preview {
-    OrderConfirmationView()
+    OrderConfirmationView(rootIsActive: .constant(false))
 }
 
 extension OrderConfirmationView {
@@ -131,7 +139,8 @@ extension OrderConfirmationView {
     
     var confirmOrderButton: some View {
         
-        Button(action: {
+        Button(action: {            
+            orderViewModel.addOrder(cartProducts: cartViewModel.cartProducts, price: cartViewModel.totalPrice, address: cartViewModel.address)
             
         }, label: {
             Text("Confirm order")

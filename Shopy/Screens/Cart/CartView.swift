@@ -10,6 +10,7 @@ import SwiftUI
 struct CartView: View {
     
     @EnvironmentObject var cartViewModel: CartViewModel
+    @State private var isActive = false
     
     var body: some View {
         NavigationStack {
@@ -20,6 +21,10 @@ struct CartView: View {
                     cartListView
                 }
             }
+            .navigationDestination(isPresented: $isActive, destination: {
+                DeliveryAddressView(rootIsActive: $isActive)
+                    .navigationTitle("Delivery Address")
+            })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.background)
         }
@@ -118,11 +123,10 @@ extension CartView {
     }
     
     var proccedToBuyButton: some View {
-        
-        NavigationLink {
-            DeliveryAddressView()
-                .navigationTitle("Delivery Address")
-        } label: {
+
+        Button(action: {
+            isActive = true
+        }, label: {
             Text("PROCEED TO BUY")
                 .font(.headline)
                 .foregroundStyle(.white)
@@ -130,8 +134,9 @@ extension CartView {
                 .padding(.vertical, 10)
                 .background(Color.text)
                 .clipShape(RoundedRectangle(cornerRadius: 30))
-        }
+        })
         .padding(.trailing)
+        
     }
     
 }

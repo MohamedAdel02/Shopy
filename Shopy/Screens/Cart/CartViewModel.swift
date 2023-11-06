@@ -111,6 +111,22 @@ class CartViewModel: ObservableObject {
             
         }
     }
+    
+    func deleteAllCart() {
+        
+        Task {
+            do {
+                try await FirestoreManager.shared.deleteAllCart(products: cartProducts)
+                await MainActor.run {
+                    cartProducts = [CartProduct]()
+                }
+            } catch {
+                print("deleteAllCart \(error.localizedDescription)")
+            }
+            
+        }
+        
+    }
 
     
 }

@@ -11,6 +11,7 @@ struct DeliveryAddressView: View {
     
     @StateObject var deliveryAddressViewModel = DeliveryAddressViewModel()
     @EnvironmentObject var currentUser: CurrentUser
+    @Binding var rootIsActive: Bool
     
     var body: some View {
         
@@ -23,7 +24,6 @@ struct DeliveryAddressView: View {
             Spacer()
             
             Line()
-            
         }
         .background(Color.init(uiColor: .systemGray6))
         
@@ -31,7 +31,7 @@ struct DeliveryAddressView: View {
 }
 
 #Preview {
-    DeliveryAddressView()
+    DeliveryAddressView(rootIsActive: .constant(false))
 }
 
 extension DeliveryAddressView {
@@ -84,7 +84,7 @@ extension DeliveryAddressView {
     var continueButton: some View {
         
         NavigationLink {
-            PaymentView()
+            PaymentView(rootIsActive: $rootIsActive)
                 .navigationTitle("Payment")
         } label: {
             Text("CONTINUE")
