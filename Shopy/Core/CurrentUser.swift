@@ -108,6 +108,9 @@ class CurrentUser: ObservableObject {
                     userPhoto = image
                 }
             } catch {
+                await MainActor.run {
+                    userPhoto = nil
+                }
                 print("getImage \(error.localizedDescription)")
             }
         }

@@ -27,7 +27,6 @@ class OrderViewModel: ObservableObject {
                 }
                 await MainActor.run {
                     self.orders = orders
-                    print(orders)
                 }
             } catch {
                 print("getOrders \(error.localizedDescription)")
