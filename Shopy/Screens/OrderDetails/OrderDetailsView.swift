@@ -7,13 +7,18 @@
 
 import SwiftUI
 
+enum OrderViewSource {
+    case list
+    case confirmation
+}
+
 struct OrderDetailsView: View {
     
-    @EnvironmentObject var cartViewModel: CartViewModel
     @EnvironmentObject var popToRoot: PopToRoot
     @Binding var rootIsActive: Bool
     @State var progressViewIsActive = false
     let order: Order
+    let source: OrderViewSource
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -27,21 +32,26 @@ struct OrderDetailsView: View {
                         
                         VStack(alignment: .leading, spacing: 15) {
                             
-                            confirmationText
+                            if source == .confirmation {
+                                confirmationText
+                            }
                             orderNumber
                             
                             LazyVStack(spacing: 5) {
                                 ForEach(order.products) { product in
-                                    OrderCell(product: product)
+                                    OrderProductCell(product: product)
                                 }
                             }
                             .padding(.horizontal)
                             .padding(.bottom)
                             
                             orderDate
+                            orderTotal
                             orderAddress
                             Spacer()
-                            continueShoppingButton
+                            if source == .confirmation {
+                                continueShoppingButton
+                            }
                             Line()
                         }
                         
@@ -51,14 +61,13 @@ struct OrderDetailsView: View {
                 .background(Color.init(uiColor: .systemGray6))
             }
             .scrollIndicators(.hidden)
-            .navigationBarBackButtonHidden()
             
         }
     }
 }
 
 #Preview {
-    OrderDetailsView(rootIsActive: .constant(false), order: MockData.order)
+    OrderDetailsView(rootIsActive: .constant(false), order: MockData.order, source: .confirmation)
 }
 
 extension OrderDetailsView {
@@ -69,13 +78,14 @@ extension OrderDetailsView {
             .font(.title3)
             .foregroundStyle(Color.green)
             .bold()
-            .padding()
+            .padding(.horizontal)
+            .padding(.top)
     }
     
     var orderNumber: some View {
         
         VStack(alignment: .leading) {
-            Text("Order Number:")
+            Text("Order #:")
                 .font(.title3)
                 .foregroundStyle(Color.text)
                 .fontWeight(.medium)
@@ -83,8 +93,7 @@ extension OrderDetailsView {
                 .font(.callout)
                 .foregroundStyle(Color.text)
         }
-        .padding(.horizontal)
-        .padding(.bottom)
+        .padding()
         
     }
     
@@ -109,6 +118,27 @@ extension OrderDetailsView {
                 }
             }
         }
+    }
+    
+    var orderTotal: some View {
+        HStack(alignment: .top, spacing: 25) {
+            Text("Order total: ")
+                .padding(.leading, 20)
+                .padding(.top, 10)
+                .foregroundStyle(Color.text)
+                .fontWeight(.medium)
+            
+            Text(order.price, format: .currency(code: "USD"))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(Color.text)
+                .fontWeight(.medium)
+                .padding()
+                .background(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .padding(.trailing, 40)
+        }
+        
+        
     }
     
     var orderAddress: some View {
@@ -156,7 +186,6 @@ extension OrderDetailsView {
     
     func continueShoppingPressed() {
         
-        cartViewModel.deleteAllCart()
         withAnimation {
             progressViewIsActive = true
         }

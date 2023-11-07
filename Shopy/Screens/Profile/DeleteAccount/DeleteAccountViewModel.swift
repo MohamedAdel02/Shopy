@@ -16,7 +16,7 @@ class DeleteAccountViewModel: ObservableObject {
     var alertTitle = ""
     var alertMessage = ""
     
-    func deletePressed() {
+    func deletePressed(products: [CartProduct], orders: [Order]) {
         
         let password = password.trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -24,7 +24,7 @@ class DeleteAccountViewModel: ObservableObject {
             return
         }
         
-        deleteAccount(password: password)
+        deleteAccount(password: password, products: products, orders: orders)
     }
     
     func passwordIsEmpty(password: String) -> Bool {
@@ -38,11 +38,11 @@ class DeleteAccountViewModel: ObservableObject {
         return false
     }
     
-    func deleteAccount(password: String) {
+    func deleteAccount(password: String, products: [CartProduct], orders: [Order]) {
         
         Task {
             do {
-                try await AuthManager.shared.deleteUser(password: password)
+                try await AuthManager.shared.deleteUser(password: password, products: products, orders: orders)
                 await MainActor.run {
                     isDeleted = true
                 }

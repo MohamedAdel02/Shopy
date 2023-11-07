@@ -66,9 +66,12 @@ class FirestoreManager {
     }
     
     
-    func deleteUser(uid: String) async throws {
+    func deleteUser(uid: String, products: [CartProduct], orders: [Order]) async throws {
 
-        try await db.collection("users").document(uid).delete()                  
+        try await deleteAllCart(products: products)
+        try await deleteAllOrders(uid: uid, orders: orders)
+        try await db.collection("users").document(uid).delete()
+
     }
     
     func getCartProducts() async throws -> [CartProduct]? {
@@ -79,50 +82,9 @@ class FirestoreManager {
         
         let snapshot = try await db.collection("users").document(uid).collection("cart").getDocuments()
 
-        return handleDocuments(snapshot: snapshot)
+        return FirestoreHelper.getProducts(snapshot: snapshot)
     }
     
-    func handleDocuments(snapshot: QuerySnapshot) -> [CartProduct] {
-        
-        var products = [CartProduct]()
-        
-        for document in snapshot.documents {
-            
-            guard let id = Int(document.documentID) else {
-                continue
-            }
-            let title = document.get("title") as? String ?? ""
-            let image = document.get("image") as? String ?? ""
-            let price = document.get("price") as? Double ?? 0.0
-            let quantity = document.get("quantity") as? Int ?? 1
-            let sizeString = document.get("size") as? String
-            var size: Size?
-            
-            switch sizeString {
-            case "S":
-                size = .small
-            case "M":
-                size = .medium
-            case "L":
-                size = .large
-            case "XL":
-                size = .xLarge
-            case "XXL":
-                size = .xxLarge
-            case .none:
-                break
-            case .some(_):
-                break
-            }
-            
-            let product = CartProduct(id: id, title: title, image: image, price: price, size: size, quantity: quantity)
-            
-            products.append(product)
-        }
-        
-        return products
-        
-    }
     
     func updateCartProduct(product: CartProduct) async throws {
         
@@ -162,5 +124,74 @@ class FirestoreManager {
         
     }
     
+    func getOrders() async throws -> [Order]? {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        
+        let snapshot = try await db.collection("users").document(uid).collection("orders").getDocuments()
+
+        return try await FirestoreHelper.getOrders(snapshot: snapshot)
+    }
     
+    func getOrderProducts(orderId: String) async throws -> [CartProduct]? {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return nil
+        }
+        
+        let snapshot = try await db.collection("users").document(uid).collection("orders").document(orderId).collection("products").getDocuments()
+
+        return FirestoreHelper.getProducts(snapshot: snapshot)
+    }
+
+    
+    func updateOrders(order: Order) async throws {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let data: [String: Any] = [
+            "price": order.price,
+            "address": order.address,
+            "date": order.orderedOn as Any
+        ]
+        
+        try await db.collection("users").document(uid).collection("orders").document("\(order.id)").setData(data)
+        try await updateOrderProducts(uid: uid, order: order)
+    }
+    
+    func updateOrderProducts(uid: String, order: Order) async throws {
+        
+        for product in order.products {
+            
+            let productData: [String: Any] = [
+                "title": product.title,
+                "image": product.image,
+                "price": product.price,
+                "size": product.size?.rawValue as Any,
+                "quantity": product.quantity
+            ]
+            
+            try await db.collection("users").document(uid).collection("orders").document(order.id).collection("products").document("\(product.id)").setData(productData)
+        }
+    }
+    
+    func deleteAllOrders(uid: String, orders: [Order]) async throws {
+        
+        for order in orders {
+            try await deleteAllOrderProducts(uid: uid, orderId: order.id, products: order.products)
+            try await db.collection("users").document(uid).collection("orders").document(order.id).delete()
+        }
+    }
+    
+    func deleteAllOrderProducts(uid: String, orderId: String, products: [CartProduct]) async throws {
+        
+        for product in products {
+            try await db.collection("users").document(uid).collection("orders").document(orderId).collection("products").document("\(product.id)").delete()
+        }
+    }
+
 }

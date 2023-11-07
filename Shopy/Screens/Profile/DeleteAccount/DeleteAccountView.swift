@@ -12,7 +12,8 @@ struct DeleteAccountView: View {
     @StateObject var deleteAccountViewModel = DeleteAccountViewModel()
     @State private var confirmationIsPresented = false
     @EnvironmentObject var currentUser: CurrentUser
-
+    @EnvironmentObject var cartViewModel: CartViewModel
+    @EnvironmentObject var orderViewModel: OrderViewModel
     
     var body: some View {
         ZStack {
@@ -57,7 +58,7 @@ struct DeleteAccountView: View {
         }
         .confirmationDialog("Are you sure you want to delete your account?", isPresented: $confirmationIsPresented, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
-                deleteAccountViewModel.deletePressed()
+                deleteAccountViewModel.deletePressed(products: cartViewModel.cartProducts, orders: orderViewModel.orders)
             }
         }
         .alert(deleteAccountViewModel.alertTitle, isPresented: $deleteAccountViewModel.alertIsPresented, actions: {

@@ -13,6 +13,29 @@ class OrderViewModel: ObservableObject {
     @Published var order: Order?
     @Published var detailsIsPresented = false
 
+    init() {
+        
+        getOrders()
+    }
+    
+    func getOrders() {
+
+        Task {
+            do {
+                guard let orders = try await FirestoreManager.shared.getOrders() else {
+                    return
+                }
+                await MainActor.run {
+                    self.orders = orders
+                    print(orders)
+                }
+            } catch {
+                print("getOrders \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
     func addOrder(cartProducts: [CartProduct], price: Double, address: String) {
         
         let id = UUID().uuidString
@@ -22,6 +45,7 @@ class OrderViewModel: ObservableObject {
 
         if let order = order {
             orders.append(order)
+            storeOrder(order: order)
         }
         
         detailsIsPresented = true
@@ -36,6 +60,17 @@ class OrderViewModel: ObservableObject {
         }
         
         return nil
+    }
+    
+    func storeOrder(order: Order) {
+        
+        Task {
+            do {
+                try await FirestoreManager.shared.updateOrders(order: order)
+            } catch {
+                print("storeOrder \(error.localizedDescription)")
+            }
+        }
     }
     
 }

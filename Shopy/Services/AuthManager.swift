@@ -50,7 +50,7 @@ class AuthManager {
     }
     
     
-    func deleteUser(password: String) async throws {
+    func deleteUser(password: String, products: [CartProduct], orders: [Order]) async throws {
         
         guard let user = Auth.auth().currentUser, let email = user.email else {
             return
@@ -59,8 +59,8 @@ class AuthManager {
         let credential = EmailAuthProvider.credential(withEmail: email, password: password)
         try await Auth.auth().currentUser?.reauthenticate(with: credential)
         
-        try await FirestoreManager.shared.deleteUser(uid: user.uid)
-        try await StorageManager.shared.deleteImage()
+        try? await FirestoreManager.shared.deleteUser(uid: user.uid, products: products, orders: orders)
+        try? await StorageManager.shared.deleteImage()
         try await user.delete()
     }
     

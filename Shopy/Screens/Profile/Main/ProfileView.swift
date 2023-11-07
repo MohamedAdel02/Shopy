@@ -31,7 +31,7 @@ struct ProfileView: View {
                 case .info:
                     ProfileInfoView()
                 case .orders:
-                    ChangePasswordView()
+                    OrdersListView()
                 case .changePassword:
                     ChangePasswordView()
                 case .deleteAccount:

@@ -10,6 +10,7 @@ import SwiftUI
 struct ShopyTabView: View {
     
     @StateObject var cartViewModel = CartViewModel()
+    @StateObject var orderViewModel = OrderViewModel()
     @StateObject var popToRoot = PopToRoot()
     
     var body: some View {
@@ -38,6 +39,7 @@ struct ShopyTabView: View {
             popToRoot.navToHome.toggle()
         }
         .environmentObject(popToRoot)
+        .environmentObject(orderViewModel)
         .environmentObject(cartViewModel)
         
     }

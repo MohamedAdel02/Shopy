@@ -1,5 +1,5 @@
 //
-//  OrderCell.swift
+//  OrderProductCell.swift
 //  Shopy
 //
 //  Created by Mohamed Adel on 06/11/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OrderCell: View {
+struct OrderProductCell: View {
     
     let product: CartProduct
     
@@ -77,5 +77,5 @@ struct OrderCell: View {
 
 
 #Preview {
-    OrderCell(product: MockData.cartProduct)
+    OrderProductCell(product: MockData.cartProduct)
 }
